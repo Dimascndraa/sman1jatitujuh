@@ -2,6 +2,8 @@
 
 require_once 'koneksi.php';
 $query1 = mysqli_query($koneksi, "SELECT * FROM tbl_artikel ORDER BY id DESC");
+$query2 = mysqli_query($koneksi, "SELECT * FROM tbl_artikel ORDER BY id DESC LIMIT 5");
+$query3 = mysqli_query($koneksi, "SELECT * FROM tbl_kategori_artikel ORDER BY id DESC");
 $awal = mysqli_fetch_assoc($query1);
 $aktif = 'artikel';
 ?>
@@ -63,7 +65,7 @@ $aktif = 'artikel';
 			<div class="container">
 				<div class="row">
 					<div id="tg-twocolumns" class="tg-twocolumns">
-						<div class="col-xs-12 col-sm-8 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 							<div id="tg-content" class="tg-content">
 
 								<div id="tg-content" class="tg-content">
@@ -109,13 +111,67 @@ $aktif = 'artikel';
 												</article>
 											</div>
 											<?php endforeach; ?>
-
 										</div>
 									</div>
-								</div>
-
-
+								</div>	
 							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-left">
+							<aside id="tg-sidebar" class="tg-sidebar">
+								<div class="tg-widget tg-widgetcoursecategories">
+									<div class="tg-widgettitle">
+										<h3>Kategori</h3>
+									</div>
+									<div class="tg-widgetcontent">
+										<ul>
+											<?php foreach($query3 as $q3) : ?>
+											<?php 
+											$jumlah_artikel = mysqli_query($koneksi, "SELECT count(*) FROM tbl_artikel WHERE id_kategori = '$q3[id]'");
+											$nama = mysqli_fetch_assoc($jumlah_artikel);
+											$akhir = $nama["count(*)"];
+											?>
+											<li>
+												<a href="kategori.html?id=<?= $q3['id'] ?>">
+													<span><?= $q3['nama_kategori'] ?></span>
+													<span>(<?= $akhir ?>)</span>
+												</a>
+											</li>
+											<?php endforeach; ?>
+										</ul>
+									</div>
+								</div>
+								<div class="tg-widget tg-widgetlatestcourses">
+									<div class="tg-widgettitle">
+										<h3>Berita Terbaru</h3>
+									</div>
+									<div class="tg-widgetcontent">
+										<?php foreach($query2 as $q2) : ?>
+										<article class="tg-campus tg-campusleftthumb">
+												<div class="col-lg-6">
+													<figure class="tg-featuredimg">
+														<a href="detail_artikel.html?id=<?= $q2['id'] ?>">
+															<img src="images/artikel/<?= $q2['foto'] ?>" alt="image description">
+														</a>
+													</figure>
+												</div>
+											<div class="tg-campuscontent">
+												<ul class="tg-matadata">
+													<li>
+														<a href="detail_artikel.html?id=<?= $q2['id'] ?>">
+															<i class="fa fa-calendar"></i>
+															<span><?= date('l, d M Y', strtotime($q2['tanggal'])) ?></span>
+														</a>
+													</li>
+												</ul>
+												<div class="tg-campustitle">
+													<h3><a href="detail_artikel.html?id=<?= $q2['id'] ?>"><?= $q2['judul'] ?></a></h3>
+												</div>
+											</div>
+										</article>
+										<?php endforeach; ?>
+									</div>
+								</div>
+							</aside>
 						</div>
 					</div>
 				</div>

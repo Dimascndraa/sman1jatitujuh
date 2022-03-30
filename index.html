@@ -148,7 +148,7 @@ $aktif = 'home';
 																<li>
 																	<a href="detail_artikel.html?id=<?= $artikel['id'] ?>">
 																		<i class="fa fa-calendar"></i>
-																		<span><?= date('l, d M y', strtotime($artikel['tanggal'])) ?></span>
+																		<span><?= date('l, d F Y', strtotime($artikel['tanggal'])) ?></span>
 																</a>
 															</li>
 														</ul>
@@ -194,7 +194,7 @@ $aktif = 'home';
 									<div class="tg-widgetcontent">
 										<ul>
 											<?php foreach($query3 as $q3) : ?>
-												<li><a href="javascript:void(0);"><?= $q3['nama_kategori'] ?>.</a></li>
+												<li><a href="kategori.html?id=<?= $q3['id'] ?>"><?= $q3['nama_kategori'] ?>.</a></li>
 											<?php endforeach; ?>
 										</ul>
 									</div>
