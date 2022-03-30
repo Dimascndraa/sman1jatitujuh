@@ -1,0 +1,198 @@
+<?php
+
+require_once 'koneksi.php';
+if (!isset($_GET['id']) || $_GET['id'] == '') header('Location: index.php');
+
+$id = $_GET['id'];
+$query = mysqli_query($koneksi, "SELECT tbl_siswa.*, tbl_jurusan.nama_jurusan FROM tbl_siswa LEFT JOIN tbl_jurusan ON tbl_siswa.id_jurusan = tbl_jurusan.id WHERE tbl_siswa.id = $id");
+
+$row = mysqli_fetch_assoc($query);
+$aktif = 'siswa';
+?>
+<!doctype html>
+<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>			<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+
+<?php include "head.html" ?>
+
+<body>
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<!--************************************
+			Wrapper Start
+	*************************************-->
+	<div id="tg-wrapper" class="tg-wrapper">
+		<!--************************************
+				Header Start
+		*************************************-->
+		<?php include "header.html" ?>
+		<!--************************************
+				Header End
+		*************************************-->
+
+		<!--************************************
+				Inner Banner Start
+		*************************************-->
+		<div class="tg-innerbanner">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<ol class="tg-breadcrumb">
+							<li><a href="javascript:void(0);">home</a></li>
+							<li class="tg-active">detail siswa</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--************************************
+				Inner Banner End
+		*************************************-->
+		<!--************************************
+				Main Start
+		*************************************-->
+		<main id="tg-main" class="tg-main tg-haslayout">
+			<div class="container">
+				<div class="row">
+					<div id="tg-twocolumns" class="tg-twocolumns">
+						<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+							<div id="tg-content" class="tg-content">
+								<div class="tg-faculy tg-facultydetail">
+									<div class="col-lg-4">
+										<figure><img src="images/siswa/<?= $row['foto'] ?>" alt="image description">
+										</figure>
+									</div>
+									<div class="tg-facultycontent">
+										<div class="tg-departmentname">
+											<h2>Detail Siswa</h2>
+										</div>
+										<div class="tg-facultyname">
+											<h3>
+												<?= $row['nama'] ?>
+											</h3>
+										</div>
+										<span class="tg-facultydesignation">NIS:
+											<?= $row['nis'] ?>
+										</span>
+										<span class="tg-facultydesignation"><strong>
+												<?= $row['nama_jurusan'] ?>
+											</strong></span>
+										<!-- <div class="tg-description">
+											<p>
+												<?= $row['pesan'] ?>
+											</p>
+										</div> -->
+										<ul class="tg-contactinfo">
+											<li>
+												<i class="icon-phone-handset"></i>
+												<span><a href="https://wa.me/<?= $row['no_hp'] ?>">
+														<?= $row['no_hp'] ?>
+													</a></span>
+											</li>
+											<li>
+												<i class="icon-location"></i>
+												<span>
+													<?= $row['alamat'] ?>
+												</span>
+											</li>
+											<li>
+												<i class="fas fa-venus-mars"></i>
+												<span>
+													<?= $row['jenis_kelamin'] == "L" ? "Laki Laki" : "Perempuan" ?>
+												</span>
+											</li>
+											<li>
+												<i class="fas fa-calendar-day"></i>
+												<span>
+													<?= $row['tempat_lahir']?>, <?= date('l, d F Y', strtotime($row['tanggal_lahir']))?>
+												</span>
+											</li>
+										</ul>
+
+									</div>
+									<hr>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!--************************************
+				Main End
+		*************************************-->
+		<!--************************************
+				Footer Start
+		*************************************-->
+		<?php include "footer.html" ?>
+		<!--************************************
+				Footer End
+		*************************************-->
+	</div>
+	<!--************************************
+			Wrapper End
+	*************************************-->
+	<script src="js/vendor/jquery-library.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/mapclustering/data.json"></script>
+	<script
+		src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
+	<script src="js/mapclustering/markerclusterer.min.js"></script>
+	<script src="js/mapclustering/infobox.js"></script>
+	<script src="js/mapclustering/map.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/isotope.pkgd.js"></script>
+	<script src="js/prettyPhoto.js"></script>
+	<script src="js/countdown.js"></script>
+	<script src="js/collapse.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/gmap3.js"></script>
+	<script src="js/main.js"></script>
+	<!-- Code injected by live-server -->
+	<script type="text/javascript">
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function () {
+				function refreshCSS() {
+					var sheets = [].slice.call(document.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+				var address = protocol + window.location.host + window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function (msg) {
+					if (msg.data == 'reload') window.location.reload();
+					else if (msg.data == 'refreshcss') refreshCSS();
+				};
+				if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		}
+		else {
+			console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+	// ]]>
+	</script>
+</body>
+
+
+</html>

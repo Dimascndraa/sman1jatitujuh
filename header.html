@@ -1,0 +1,64 @@
+<header id="tg-header" class="tg-header tg-haslayout">
+    <div class="tg-topbar">
+        <div class="tg-leftbox">
+            <span id="tg-datebox" class="tg-datebox"></span>
+            <span class="tg-rtltextbox">
+                <?= $identitas['nama'] ?>
+            </span>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-logoandnoticeboard">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 col-sm-6 col-md-6 col-xs-6">
+                            <strong class="tg-logo"><a href="index.html"><img src="resources/images/logo2.png"
+                                        alt="University of Education and knowledge"></a></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-navigationarea">
+                    <nav id="tg-nav" class="tg-nav">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#tg-navigation" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                            <ul>
+                                <li class="menu-item">
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li class="menu-item <?= $aktif == 'artikel' ? 'current-menu-item' : ''; ?>">
+                                    <a href="<?= $aktif == 'artikel' ? 'javascript:void(0);' : 'artikel.html'; ?>">Artikel</a>
+                                </li>
+                                <li class="menu-item-has-children <?= $aktif == 'visi_misi' || $aktif == 'guru' || $aktif == 'siswa' || $aktif == 'jurusan' || $aktif == 'ekskul' ? 'current-menu-item' : ''; ?>">
+                                    <a href="javascript:void(0);">Profil Sekolah</a>
+                                    <ul class="sub-menu">
+                                        <li class=""><a href="siswa.html">Siswa</a></li>
+                                        <li><a href="guru.html">Guru</a></li>
+                                        <li><a href="jurusan.html">Jurusan</a></li>
+                                        <li><a href="ekskul.html">Ekskul</a></li>
+                                        <li class="<?= $aktif == 'visi_misi' ? 'current-menu-item' : ''; ?>"><a href="visi_misi.html">Visi Misi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="<?= $aktif == 'tentang_website' ? 'current-menu-item' : ''; ?>"><a href="<?= $aktif == 'tentang_website' ? 'javascript:void(0)' : 'tentang_website.html'; ?>">Tentang Website</a></li>
+                                <li class="<?= $aktif == 'bukutamu' ? 'current-menu-item' : ''; ?>"><a href="<?= $aktif == 'bukutamu' ? 'javascript:void(0);' : 'bukutamu.html'; ?>">Buku Tamu</a></li>
+
+                                <li class="text-end"><a href="login.html">Login</a></li>
+                            </ul>
+                            </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
