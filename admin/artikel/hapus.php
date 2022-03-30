@@ -12,6 +12,7 @@ if (file_exists("../../images/artikel/" . $row['foto'])) unlink("../../images/ar
 $query = mysqli_query($koneksi, "DELETE FROM tbl_artikel WHERE id = {$id}");
 if ($query) {
 	$_SESSION['sukses'] = 'Data Berhasil Dihapus!';
+	unlink("../../images/artikel/" . $row['foto']);
 	header('Location: ../index.php?page=artikel');
 } else {
 	$_SESSION['gagal'] = 'Data Gagal Dihapus!';

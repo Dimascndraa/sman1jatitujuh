@@ -12,6 +12,7 @@ if (file_exists("../../images/guru/" . $row['foto'])) unlink("../../images/guru/
 $query = mysqli_query($koneksi, "DELETE FROM tbl_guru WHERE id = {$id}");
 if ($query) {
 	$_SESSION['sukses'] = 'Data Berhasil Dihapus!';
+	unlink("../../images/guru/" . $row['foto']);
 	header('Location: ../index.php?page=guru');
 } else {
 	$_SESSION['gagal'] = 'Data Gagal Dihapus!';
